@@ -29,9 +29,9 @@ RUN pip install -r /tmp/requirements.txt
 
 ARG PROJECT_NAME="home"
 
-RUN printf "#!/bin/bash\n\" > ./paracord_runner.sh && \
+RUN printf "#!/bin/bash\n" > ./paracord_runner.sh && \
     printf "RUN_PORT=\"\${PORT:-8000}\"\n\n" >> ./paracord_runner.sh && \
-    printf "python manage.py migrate --no-input\n\n" >> ./paracord_runner.sh && \
+    printf "python manage.py migrate --no-input\n" >> ./paracord_runner.sh && \
     printf "gunicorn ${PROJECT_NAME}.wsgi:application --bind 0.0.0.0:\$RUN_PORT\n" >> ./paracord_runner.sh
 
 RUN apt-get remove -y gcc && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
